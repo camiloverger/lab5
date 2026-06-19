@@ -1,8 +1,10 @@
 /* CAMILO - GONZALO - FRANCO */
 
-#include
-#include
-#include
+#include "IControladorUsuario.h"
+#include "IControladorSesion.h"
+#include "IControladorMaterial.h"
+#include "IControladorPrestamo.h"
+#include "IControladorInformacion.h"
 
 using namespace std;
 
