@@ -3,7 +3,7 @@
 
 #include "IControladorUsuario.h"
 #include "IControladorSesion.h"
-#include "IControladorMarerial.h"
+#include "IControladorMaterial.h"
 #include "IControladorPrestamo.h"
 #include "IControladorInformacion.h"
 #include <iostream>
