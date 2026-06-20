@@ -1,6 +1,10 @@
 #ifndef CONTROLADORSESION_H
 #define CONTROLADORSESION_H
 
+#include <string>
+
+using namespace std;
+
 class ControladorSesion : public IControladorSesion{
 
 private:
@@ -10,9 +14,9 @@ private:
 
 public:
     static ControladorSesion* getInstancia();
-    bool ingresarCredenciales(String idUsuario, String passUsuario);
+    bool ingresarCredenciales(string idUsuario, string passUsuario);
     void cerrarSesion();
 
-}
+};
 
 #endif

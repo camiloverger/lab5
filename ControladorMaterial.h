@@ -1,6 +1,10 @@
 #ifndef CONTROLADORMATERIAL_H
 #define CONTROLADORMATERIAL_H
 
+#include <string>
+
+using namespace std;
+
 class ControladorMaterial : public IControladorMaterial{
 
 private:
@@ -10,8 +14,8 @@ private:
 
 public:
         static ControladorMaterial* getInstancia();
-        void registrarMaterial(int codigo, String titulo, int anio);
+        void registrarMaterial(int codigo, string titulo, int anio);
 
-}
+};
 
 #endif

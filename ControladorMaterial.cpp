@@ -4,6 +4,7 @@
 #include "DtMaterial.h"
 #include "DtLibro.h"
 #include "DtRevista.h"
+#include <string>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ ControladorMaterial* ControladorMaterial::getInstancia(){
     return instancia;
 }
 
-void registrarMaterial(int codigo, String titulo, int anio){
+void registrarMaterial(int codigo, string titulo, int anio){
 
     DtMaterial material = new DtMaterial(codigo, titulo, anio);
     if(ingresarTipo() == Libro){
@@ -90,7 +91,7 @@ TipoMaterial ingresarTipo(){
 
 DtLibro detallesLibro(){
 
-    String autor;
+    string autor;
     int cantPaginas;
     cout << "Autor: ";
     cin >> autor;

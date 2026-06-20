@@ -2,12 +2,13 @@
 #include "Sesion.h"
 #include "Usuario.h"
 #include "ManejadorUsuario.h"
+#include <string>
 
 using namespace std;
 
 // FIRMAS FUNCIONES INTERNAS
 
-bool validar(String idUsuario, String passUsuario);
+bool validar(string idUsuario, string passUsuario);
 
 // FUNCIONES PRINCIPALES
 
@@ -20,7 +21,7 @@ ControladorSesion* ControladorSesion::getInstancia(){
     return instancia;
 }
 
-bool ingresarCredenciales(String idUsuario, String passUsuario){
+bool ingresarCredenciales(string idUsuario, string passUsuario){
 
     if(!validar(idUsuario, passUsuario)){
         sesion.setIdUsuario(nullptr);
@@ -43,7 +44,7 @@ void cerrarSesion(){
 
 // FUNCIONES INTERNAS
 
-bool validar(String idUsuario, String passUsuario){
+bool validar(string idUsuario, string passUsuario){
 
     ManejadorUsuario manejador = new ManejadorUsuario();
     Usuario usuario = manejador.buscarUsuario(idUsuario);
