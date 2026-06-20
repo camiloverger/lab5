@@ -48,6 +48,10 @@ void Usuario::setPassword(string password){
     this->password = password;
 }
 
+bool Usuario::validarContrasenia(string passwordIngresada){
+    return passwordIngresada == this->getPassword();
+}
+
 Usuario::~Usuario(){}
 
 

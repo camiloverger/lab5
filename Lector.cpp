@@ -9,6 +9,7 @@
 #include "Prestamo.h"
 #include "Puntaje.h"
 #include "Date.h"
+#include "DtLector.h"
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -40,6 +41,10 @@ void Lector::setFechaRegistro(Date fechaRegistro){
 
 void Lector::agregarPrestamo(Prestamo* p){
     prestamos.insert(p);
+}
+
+string Lector::tipoUsuario(){
+    return "Lector";
 }
 
 

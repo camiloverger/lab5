@@ -27,6 +27,7 @@ public:
     void setNombre(string);
     string getPassword();
     void setPassword(string);
+    bool validarContrasenia(string);
     virtual string tipoUsuario() = 0;
     virtual ~Usuario();
 };
