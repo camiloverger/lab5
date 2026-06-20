@@ -10,7 +10,6 @@ using namespace std;
 class IControladorMaterial{
 
 public:
-    virtual ControladorMaterial* getInstancia() = 0;
     virtual void registrarMaterial(int codigo, string titulo, int anio) = 0;
 
 };

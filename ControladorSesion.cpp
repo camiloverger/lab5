@@ -1,3 +1,4 @@
+#include "IControladorSesion.h"
 #include "ControladorSesion.h"
 #include "Sesion.h"
 #include "Usuario.h"
@@ -17,12 +18,14 @@ ControladorSesion::ControladorSesion(){}
 ControladorSesion::~ControladorSesion(){}
 
 ControladorSesion* ControladorSesion::getInstancia(){
-    if(instancia == NULL) instania = new ControladorSesion();
+    if(instancia == NULL) instancia = new ControladorSesion();
     return instancia;
 }
 
-bool ingresarCredenciales(string idUsuario, string passUsuario){
+bool ControladorSesion::ingresarCredenciales(string idUsuario, string passUsuario){
 
+    Sesion se = new Sesion();
+    Sesion sesion = se.getInstancia();
     if(!validar(idUsuario, passUsuario)){
         sesion.setIdUsuario(nullptr);
         return false;
@@ -34,7 +37,7 @@ bool ingresarCredenciales(string idUsuario, string passUsuario){
 
 }
 
-void cerrarSesion(){
+void ControladorSesion::cerrarSesion(){
 
     Sesion se = new Sesion();
     Sesion sesion = se.getInstancia();
