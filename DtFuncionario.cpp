@@ -12,7 +12,7 @@ DtFuncionario::DtFuncionario(string identificador, string nombre, string passwor
     this->numeroEmpleado = numeroEmpleado;
 }
 
-DtFuncionario::DtFuncionario(DtFuncionario &otro) : DtUsuario(otro) {
+DtFuncionario::DtFuncionario(const DtFuncionario &otro) : DtUsuario(otro) {
     this->numeroEmpleado = otro.numeroEmpleado;
 }
 

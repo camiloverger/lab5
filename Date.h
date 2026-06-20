@@ -10,15 +10,11 @@ private:
 public:
     Date();
     Date(int, int, int);
-    Date(Date &);
+    Date(const Date &);
     int getDia();
-    void setDia(int);
     int getMes();
-    void setMes(int);
     int getAnio();
-    void setAnio(int);
     ~Date();
-
 };
 
 #endif

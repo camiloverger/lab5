@@ -1,6 +1,8 @@
 #include "Date.h"
 #include "Hora.h"
 #include "Reloj.h"
+#include <stdio.h>
+
 
 
 Reloj* Reloj::instancia = NULL;

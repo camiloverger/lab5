@@ -16,7 +16,7 @@ private:
 public:
     DtFuncionario();
     DtFuncionario(string, string, string, int);
-    DtFuncionario(DtFuncionario &);
+    DtFuncionario(const DtFuncionario &);
     int getNumeroEmpleado();
     ~DtFuncionario();
 };

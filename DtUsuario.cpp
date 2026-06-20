@@ -24,7 +24,7 @@ DtUsuario::DtUsuario(string identificador, string nombre, string password){
     this->password = password;
 }
 
-DtUsuario::DtUsuario(DtUsuario &otro){
+DtUsuario::DtUsuario(const DtUsuario &otro){
     this->identificador = otro.identificador;
     this->nombre = otro.nombre;
     this->password = otro.password;

@@ -19,24 +19,14 @@ class IControladorUsuario
 {
 public:
     virtual DtLector ingresarDatosLector(string, string, string, Date) = 0;
-    virtual void confirmarLector() = 0;
-    virtual void cancelarLector() = 0;
+    virtual void confirmarLector(DtLector &) = 0;
+    virtual void cancelarLector(DtLector &) = 0;
     virtual DtFuncionario ingresarDatosFuncionario(string, string, string, int) = 0;
-    virtual void confirmarFuncionario() = 0;
-    virtual void cancelarFuncionario() = 0;
+    virtual void confirmarFuncionario(DtFuncionario &) = 0;
+    virtual void cancelarFuncionario(DtFuncionario &) = 0;
 };
 
 
 #endif // ICONTROLADORUSUARIO_H
 
 
-/*
-public:
-- ingresarDatosLector(cedula : String, nombre : String, password : String, fechaRegistro : Date) : DtLector
-- confirmarLector()
-- cancelarLector()
-- ingresarDatosFuncionario(cedula : String, nombre : String, password : String, numeroEmpledo : Integer) : DtFuncionario
-- confirmarFuncionario()
-- cancelarFuncionario()
-
-*/
