@@ -26,6 +26,10 @@ void Funcionario::setNumeroEmpleado(int numeroEmpleado){
     this->numeroEmpleado = numeroEmpleado;
 }
 
+string Funcionario::tipoUsuario(){
+    return "Funcionario";
+}
+
 Funcionario::~Funcionario(){}
 
 

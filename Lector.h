@@ -33,6 +33,7 @@ public:
     void agregarPrestamo(Prestamo* p);
     DtLector getDatosLector();  // <-- agregado po Franco
     set<Prestamo*> getPrestamos(); // <-- agregado po Franco
+    string tipoUsuario();
     ~Lector();
 };
 

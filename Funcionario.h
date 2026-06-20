@@ -23,6 +23,7 @@ public:
     Funcionario(string, string, string, int);
     int getNumeroEmpleado();
     void setNumeroEmpleado(int);
+    string tipoUsuario();
     ~Funcionario();
 };
 
