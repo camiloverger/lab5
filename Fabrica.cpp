@@ -1,7 +1,7 @@
 #include "Fabrica.h"
 #include "ControladorUsuario.h"
 #include "ControladorSesion.h"
-#include "ControladorMarerial.h"
+#include "ControladorMaterial.h"
 #include "ControladorPrestamo.h"
 #include "ControladorInformacion.h"
 #include <iostream>
