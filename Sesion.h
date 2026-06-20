@@ -15,6 +15,6 @@ public:
     static Sesion* getInstancia();
     ~Sesion();
 
-}
+};
 
 #endif

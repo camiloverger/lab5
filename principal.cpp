@@ -1,14 +1,20 @@
 /* CAMILO - GONZALO - FRANCO */
 
-#include "IControladorUsuario.h"
+//#include "IControladorUsuario.h"
 #include "IControladorSesion.h"
 #include "IControladorMaterial.h"
-#include "IControladorPrestamo.h"
-#include "IControladorInformacion.h"
+//#include "IControladorPrestamo.h"
+//#include "IControladorInformacion.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-void main(){
+// FIRMAS FUNCIONES INTERNAS
+
+void iniciarSesion();
+
+int main(){
 
     bool flag = true;
     while(flag){
@@ -21,6 +27,7 @@ void main(){
         switch(opcion) {
 
             case 1: // iniciar sesión
+                iniciarSesion();
                 break;
             case 2: // cerrar sesión
                 break;
@@ -54,5 +61,27 @@ void main(){
         }
 
     }
+
+    return 0;
+
+}
+
+// FUNCIONES INTERNAS
+
+void iniciarSesion(){
+/*
+    string usr[40];
+    string pass[40];
+    cout << "Usuario: ";
+    cin >> usr >> endl;
+    cout << "Contraseña: ";
+    cin >> pass >> endl;
+    bool sesion = ingresarCredenciales(usr, pass);
+    if(!sesion){
+        int opcion;
+        cout << "Usuario o contraseña incorrectos.\n(0) Volver a intentar - (1) Cancelar\nOpción: ";
+        cin >> opcion >> endl;
+        if(opcion == 0) iniciarSesion();
+    }*/
 
 }

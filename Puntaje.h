@@ -13,6 +13,6 @@ public:
     void setValor(int valor);
     ~Valor();
 
-}
+};
 
 #endif
