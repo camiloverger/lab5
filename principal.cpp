@@ -30,6 +30,7 @@ int main(){
                 iniciarSesion();
                 break;
             case 2: // cerrar sesión
+                cerrarSesion();
                 break;
             case 3: // registrar lector
                 break;
@@ -85,3 +86,4 @@ void iniciarSesion(){
     }
 
 }
+
