@@ -14,7 +14,8 @@ protected:
 
 public:
 
-    Material(int codigo, string titulo, int anioPublicacion); 
+    Material(int codigo, string titulo, int anioPublicacion);
+    virtual string tipoMaterial() = 0; 
     virtual ~Material();
 
     // Consultas

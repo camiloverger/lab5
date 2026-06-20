@@ -29,3 +29,7 @@ int Libro::getCantPaginas() {
 DtLibro Libro::getDatosMaterial(){
     return DtLibro(getCodigo(), getTitulo(), getAnioPublicacion(), autor, cantPaginas);
 }
+
+string Libro::tipoMaterial(){
+    return "Libro";
+}

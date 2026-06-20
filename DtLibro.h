@@ -15,7 +15,7 @@ private:
 
 public:
 
-    // Inicialización del DataType
+    DtLibro();
     DtLibro(
         int codigo,
         string titulo,

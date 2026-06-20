@@ -31,3 +31,7 @@ bool Revista::getEsMensual()
 DtRevista Revista::getDatosMaterial(){
     return DtRevista(getCodigo(), getTitulo(), getAnioPublicacion(), numeroEdicion, esMensual);
 }
+
+string Revista::tipoMaterial(){
+    return "Revista";
+}

@@ -1,5 +1,8 @@
 #include "DtRevista.h"
 
+
+DtRevista::DtRevista() : DtMaterial(), numeroEdicion(0), esMensual(false) { }
+
 DtRevista::DtRevista(
     int codigo,
     string titulo,
@@ -21,3 +24,5 @@ int DtRevista::getNumeroEdicion() {
 bool DtRevista::getEsMensual() {
     return esMensual;
 }
+
+

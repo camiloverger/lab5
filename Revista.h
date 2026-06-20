@@ -17,11 +17,12 @@ private:
 public:
     Revista(int codigo, string titulo, int anioPublicacion, int numeroEdicion, bool esMensual);
 
-    virtual ~Revista();
+    ~Revista();
 
     int getNumeroEdicion();
     bool getEsMensual();
     DtRevista getDatosMaterial();   // <-- agregar esto
+    string tipoMaterial();
 
 };
 
