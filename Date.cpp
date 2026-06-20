@@ -10,7 +10,7 @@ Date::Date (int dia, int mes, int anio){
     this->anio = anio;
 }
 
-Date::Date (Date &date){
+Date::Date (const Date &date){
     dia = date.dia;
     mes = date.mes;
     anio = date.anio;
@@ -20,24 +20,13 @@ int Date::getDia(){
     return this->dia;
 }
 
-void Date::setDia(int dia){
-    this->dia = dia;
-}
 
 int Date::getMes(){
     return this->mes;
 }
 
-void Date::setMes(int mes){
-    this->mes = mes;
-}
-
 int Date::getAnio(){
     return this->anio;
-}
-
-void Date::setAnio(int anio){
-    this->anio = anio;
 }
 
 Date::~Date(){}

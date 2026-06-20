@@ -16,7 +16,7 @@ private:
 public:
     DtLector();
     DtLector(string, string, string, Date);
-    DtLector(DtLector &);
+    DtLector(const DtLector &);
     Date getFechaRegistro();
     ~DtLector();
 };

@@ -10,7 +10,7 @@ DtLector::DtLector() : DtUsuario(), fechaRegistro() {}
 
 DtLector::DtLector(string identificador, string nombre, string password, Date fechaRegistro) : DtUsuario(identificador, nombre, password), fechaRegistro(fechaRegistro) {}
 
-DtLector::DtLector(DtLector &otro) : DtUsuario(otro) {
+DtLector::DtLector(const DtLector &otro) : DtUsuario(otro) {
     this->fechaRegistro = otro.fechaRegistro;
 }
 

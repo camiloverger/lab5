@@ -14,7 +14,7 @@ private:
 public:
     DtUsuario();
     DtUsuario(string, string, string);
-    DtUsuario(DtUsuario &);
+    DtUsuario(const DtUsuario &);
     string getIdentificador();
     string getNombre();
     string getPassword();
