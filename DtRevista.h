@@ -13,7 +13,7 @@ private:
 
 public:
 
-    // Inicialización del DataType
+    DtRevista();
     DtRevista(
         int codigo,
         string titulo,

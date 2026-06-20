@@ -18,10 +18,11 @@ private:
 public:
 
     Libro( int codigo, string titulo, int anioPublicacion, string autor, int cantPaginas);
-    virtual ~Libro();
+    ~Libro();
     string getAutor();
     int getCantPaginas();
     DtLibro getDatosMaterial();
+    string tipoMaterial();
 };
 
 #endif

@@ -1,6 +1,8 @@
 #include "DtLibro.h"
 
-// Inicialización del DataType
+
+DtLibro::DtLibro() : DtMaterial(), autor(" "), cantPaginas(0) {}
+
 DtLibro::DtLibro(
     int codigo,
     string titulo,
@@ -24,3 +26,4 @@ string DtLibro::getAutor() {
 int DtLibro::getCantPaginas() {
     return cantPaginas;
 }
+

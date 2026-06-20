@@ -1,5 +1,7 @@
 #include "ControladorMaterial.h"
 #include "Material.h"
+#include "Libro.h"
+#include "Revista.h"
 #include "ManejadorMaterial.h"
 #include "DtMaterial.h"
 #include "DtLibro.h"
@@ -8,122 +10,77 @@
 
 using namespace std;
 
-// FIRMAS FUNCIONES INTERNAS
 
-TipoMaterial ingresarTipo();
-DtLibro detallesLibro();
-DtRevista detallesRevista();
-bool confirmarRegistro();
-
-// FUNCIONES PRINCIPALES
 
 ControladorMaterial* ControladorMaterial::instancia = NULL;
 ControladorMaterial::ControladorMaterial(){}
 ControladorMaterial::~ControladorMaterial(){}
 
 ControladorMaterial* ControladorMaterial::getInstancia(){
-    if(instancia == NULL) instancia = new ControladorMaterial();
+    if(instancia == NULL) 
+        instancia = new ControladorMaterial();
     return instancia;
 }
 
-void registrarMaterial(int codigo, string titulo, int anio){
+DtMaterial ControladorMaterial::registrarMaterial(int codigo, string titulo, int anio){
+    materialActual = DtMaterial(codigo, titulo, anio);
+    return materialActual;
+}
 
-    DtMaterial material = new DtMaterial(codigo, titulo, anio);
-    if(ingresarTipo() == Libro){
-        DtLibro detalles = detallesLibro();
-        cout << "Código: " << material.codigo <<;
-        cout << "Título: " << material.titulo <<;
-        cout << "Año: " << material.anio <<;
-        cout << "Autor: " << detalles.autor <<;
-        cout << "Cantidad de páginas: " << detalles.cantPaginas <<;
+//pre: tipo = "Libro" o "Revista"
+string ControladorMaterial::ingresarTipo(string tipo){
+    this->tipoActual = tipo;
+    return tipoActual;
+}
 
-        if(confirmarRegistro()){
-            Libro libro = new Libro();
-            libro->codigo = material->codigo;
-            libro->titulo = material->titulo;
-            libro->anio = material->anio;
-            libro->autor = detalles->autor;
-            libro->cantPaginas = detalles->cantPaginas;
+DtLibro ControladorMaterial::detallesLibro(string autor, int paginas){
+    return DtLibro(materialActual.getCodigo(), 
+                    materialActual.getTitulo(), 
+                    materialActual.getAnioPublicacion(), 
+                    autor, 
+                    paginas);
+}
 
-            ManejadorMaterial manejador = new ManejadorMaterial();
-            manejador.agregarMaterial(libro);
+DtRevista ControladorMaterial::detallesRevista(int edicion, bool mensual){
+    return DtRevista(materialActual.getCodigo(),
+                    materialActual.getTitulo(),
+                    materialActual.getAnioPublicacion(),
+                    edicion,
+                    mensual);
+}
 
-        }
-
-    }else{
-        DtRevista detalles = detallesRevista();
-        cout << "Código: " << material.codigo <<;
-        cout << "Título: " << material.titulo <<;
-        cout << "Año: " << material.anio <<;
-        cout << "Número de edición: " << detalles.edicion <<;
-        if(detalles.mensual) cout << "Mensual: SI" <<;
-        else cout << "Mensual: NO" <<;
-
-        if(confirmarRegistro()){
-            Revista revista = new Revista();
-            revista->codigo = material->codigo;
-            revista->titulo = material->titulo;
-            revista->anio = material->anio;
-            revista->edicion = detalles->edicion;
-            revista->mensual = detalles->mensual;
-
-            ManejadorMaterial manejador = new ManejadorMaterial();
-            manejador.agregarMaterial(revista);
-
-        }
-
+void ControladorMaterial::confirmarRegistro(){
+    if (tipoActual == "Libro")
+    {
+        Libro* l = new Libro(
+            materialActual.getCodigo(), 
+            materialActual.getTitulo(), 
+            materialActual.getAnioPublicacion(), 
+            datosLibro.getAutor(),  
+            datosLibro.getCantPaginas()
+        );
+        ManejadorMaterial* mm = ManejadorMaterial::getInstancia();
+        mm->agregarMaterial(l);
     }
+    else if (tipoActual == "Revista")
+    {
+        Revista* r = new Revista(
+            materialActual.getCodigo(), 
+            materialActual.getTitulo(), 
+            materialActual.getAnioPublicacion(), 
+            datosRevista.getNumeroEdicion(), 
+            datosRevista.getEsMensual()
+        );
+        ManejadorMaterial* mm = ManejadorMaterial::getInstancia();
+        mm->agregarMaterial(r);
+    }
+    
+    
 
+    
 }
+ 
 
-// FUNCIONES INTERNAS
 
-TipoMaterial ingresarTipo(){
 
-    int tipo;
-    cout << "Ingrese el tipo de material.\n (1) Libro - (2) Revista\n";
-    cin >> tipo;
-    if(tipo == 1) return Libro;
-    if(tipo == 2) return Revista;
-    else ingresarTipo();
 
-}
-
-DtLibro detallesLibro(){
-
-    string autor;
-    int cantPaginas;
-    cout << "Autor: ";
-    cin >> autor;
-    cout << "Cantidad de páginas: ";
-    cin >> cantPaginas;
-
-    DtLibro libro = new DtLibro(autor, cantPaginas);
-    return libro;
-
-}
-
-DtRevista detallesRevista(){
-
-    int edicion;
-    bool mensual;
-    cout << "Número de edición: ";
-    cin >> edicion;
-    cout << "Publicación mensual\n(0) NO - (1) SI: ";
-    cin >> mensual;
-
-    DtRevista revista = new DtRevista(edicion, mensual);
-    return revista;
-
-}
-
-bool confirmarRegistro(){
-
-    int confirmacion;
-    cout << "¿confirmar el registro?" <<;
-    cout << "(0) NO - (1) SI"
-    if(confirmacion) return true;
-    if(confirmacion == 0) return false;
-    else confirmarRegistro();
-
-}

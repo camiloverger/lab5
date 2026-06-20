@@ -15,7 +15,9 @@ private:
 
 public:
     // Constructor
+    DtMaterial();
     DtMaterial(int codigo, string titulo, int anioPublicacion);
+    DtMaterial(const DtMaterial &);
 
     // Destructor
     virtual ~DtMaterial();
