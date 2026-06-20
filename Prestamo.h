@@ -12,10 +12,10 @@ private:
     Material* material;
 public:
     Prestamo();
-    Prestamo(Date*, int, Material*);
+    Prestamo(Date, int, Material*);
     Prestamo(Prestamo &);
-    Date* getFechaPrestamo();
-    void setFechaPrestamo(Date*);
+    Date getFechaPrestamo();
+    void setFechaPrestamo(Date);
     int getDiasPermitidos();
     void setDiasPermitidos(int);
     Material* getMaterial();

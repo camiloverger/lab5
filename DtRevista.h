@@ -22,13 +22,10 @@ public:
         bool esMensual
     );
 
-    // Destructor
     virtual ~DtRevista();
-
-    // Consultas
     int getNumeroEdicion();
-
     bool getEsMensual();
+    DtRevista getDatosMaterial();
 };
 
 #endif

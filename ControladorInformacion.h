@@ -2,6 +2,9 @@
 #define CONTROLADORINFORMACION_H
 
 #include "IControladorInformacion.h"
+#include <string>
+
+using namespace std;
 
 class Material;
 class Libro;
@@ -16,11 +19,15 @@ class ControladorInformacion : public IControladorInformacion {
 
 private:
 
+    static ControladorInformacion* instancia;
+
     Material* materialActual;
+
+    ControladorInformacion();
 
 public:
 
-    ControladorInformacion();
+    static ControladorInformacion* getInstancia();
 
     virtual ~ControladorInformacion();
 

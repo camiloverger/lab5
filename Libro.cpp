@@ -1,5 +1,7 @@
 #include "Libro.h"
 
+using namespace std;   
+
 Libro::Libro(
     int codigo,
     string titulo,
@@ -22,4 +24,8 @@ string Libro::getAutor() {
 
 int Libro::getCantPaginas() {
     return cantPaginas;
+}
+
+DtLibro Libro::getDatosMaterial(){
+    return DtLibro(getCodigo(), getTitulo(), getAnioPublicacion(), autor, cantPaginas);
 }

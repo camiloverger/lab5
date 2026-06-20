@@ -1,7 +1,11 @@
 #ifndef CONTROLADORPRESTAMO_H
 #define CONTROLADORPRESTAMO_H
 
-#include "ControladorPrestamo.h"
+#include "IControladorPrestamo.h"
+#include "Date.h"      // <-- agregar esto
+#include <string>
+
+using namespace std;
 
 class Lector;
 class Material;
@@ -10,25 +14,27 @@ class DtLector;
 class DtLibro;
 class DtRevista;
 
-class Date;
+// ya no hace falta "class Date;" porque incluimos Date.h completo
 
 class ControladorPrestamo : public IControladorPrestamo {
 private:
 
-    static ControladorMaterial* instancia;
-  
-    Lector* lectorActual; 
-    Material* materialActual; 
+    static ControladorPrestamo* instancia;
+
+    Lector* lectorActual;
+    Material* materialActual;
     Date fechaPrestamo;
     int cantDias;
-    
+
+    ControladorPrestamo();
 
 public:
 
-    ControladorPrestamo();
+    static ControladorPrestamo* getInstancia();
+
     virtual ~ControladorPrestamo();
-    
-    DtLector registrarPrestamo(string identLector); //firma
+
+    DtLector registrarPrestamo(string identLector);
 
     DtLibro ingresarCodMaterialLibro(int codMaterial);
 

@@ -17,15 +17,11 @@ private:
 
 public:
 
-    // Inicialización de la entidad
     Libro( int codigo, string titulo, int anioPublicacion, string autor, int cantPaginas);
-
     virtual ~Libro();
-
-    // Consultas
     string getAutor();
-    
     int getCantPaginas();
+    DtLibro getDatosMaterial();
 };
 
 #endif

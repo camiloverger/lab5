@@ -22,8 +22,8 @@ void ManejadorMaterial::agregarMaterial(Material* m){
     colMateriales[m->getCodigo()] = m;
 }
 
-Material* ManejadorMaterial::buscarMaterial(string codigo){
-    map<string, Material*>::iterator it = colMateriales.find(codigo);
+Material* ManejadorMaterial::buscarMaterial(int codigo){
+    map<int, Material*>::iterator it = colMateriales.find(codigo);
 
     if (it != colMateriales.end()){
         return it->second;
@@ -32,9 +32,9 @@ Material* ManejadorMaterial::buscarMaterial(string codigo){
 }
 
 void ManejadorMaterial::removerMaterial(Material* m){
-    string clave = m->getCodigo();
+    int clave = m->getCodigo();
 
-    map<string, Material*>::iterator it = colMateriales.find(clave);
+    map<int, Material*>::iterator it = colMateriales.find(clave);
 
     if (it != colMateriales.end()){
         colMateriales.erase(it);

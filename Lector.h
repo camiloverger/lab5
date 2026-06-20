@@ -16,6 +16,7 @@
 #include "Date.h"
 #include <string>
 #include <set>
+#include "DtLector.h" 
 
 using namespace std;
 
@@ -30,6 +31,8 @@ public:
     Date getFechaRegistro();
     void setFechaRegistro(Date);
     void agregarPrestamo(Prestamo* p);
+    DtLector getDatosLector();  // <-- agregado po Franco
+    set<Prestamo*> getPrestamos(); // <-- agregado po Franco
     ~Lector();
 };
 

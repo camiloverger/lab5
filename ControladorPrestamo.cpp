@@ -3,6 +3,7 @@
 #include "ManejadorMaterial.h"
 #include "ManejadorUsuario.h"
 
+#include "Usuario.h"
 #include "Material.h"
 #include "Libro.h"
 #include "Revista.h"
@@ -17,57 +18,95 @@
 
 #include "Date.h"
 
+#include <stdexcept>
 
-ControladorMaterial::ControladorPrestamo() {  
+ControladorPrestamo* ControladorPrestamo::instancia = NULL;
+
+ControladorPrestamo::ControladorPrestamo() {
+    this->lectorActual = NULL;
+    this->materialActual = NULL;
+    this->cantDias = 0;
 }
 
-ControladorMaterial::~ControladorPrestamo() { 
+ControladorPrestamo::~ControladorPrestamo() {
 }
 
-DtLector ControladorMaterial::registrarPrestamo(string identLector) {
+ControladorPrestamo* ControladorPrestamo::getInstancia() {
+    if (instancia == NULL) {
+        instancia = new ControladorPrestamo();
+    }
+    return instancia;
+}
+
+
+// a implementar
+
+DtLector ControladorPrestamo::registrarPrestamo(string identLector) {
 
     ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
 
-    Lector* l = mu->find(identLector);    
+    Usuario* u = mu->buscarUsuario(identLector);
 
-    this->lectorActual = l; 
+    if (u == NULL) {
+        throw runtime_error("Lector no encontrado: " + identLector);
+    }
 
-    return l->getDatosLector(); 
+    Lector* l = dynamic_cast<Lector*>(u);
 
+    if (l == NULL) {
+        throw runtime_error("El usuario encontrado no es un Lector: " + identLector);
+    }
+
+    this->lectorActual = l;
+
+    return l->getDatosLector();
 }
 
 
-DtLibro ControladorMaterial::ingresarCodMaterialLibro(int codMaterial) {
-    
+DtLibro ControladorPrestamo::ingresarCodMaterialLibro(int codMaterial) {
+
     ManejadorMaterial* mm = ManejadorMaterial::getInstancia();
 
-    Material* m = mm->find(codMaterial); // buscar material asociado al cod
- 
+    Material* m = mm->buscarMaterial(codMaterial); // buscar material asociado al cod
+
+    if (m == NULL) {
+        throw runtime_error("Material no encontrado");
+    }
+
     this->materialActual = m; // recordar material
 
-    Libro* libro = dynamic_cast<Libro*>(m); // Convertir el material encontrado a Libro ya que libro tiene atrbutor proios uqe no estan enmaterial 
+    Libro* libro = dynamic_cast<Libro*>(m); // Convertir el material encontrado a Libro
+
+    if (libro == NULL) {
+        throw runtime_error("El material encontrado no es un Libro");
+    }
 
     return libro->getDatosMaterial(); // retornar informacion
 }
 
 
-
-DtRevista ControladorMaterial::ingresarCodMaterialRevista(int codMaterial) {
+DtRevista ControladorPrestamo::ingresarCodMaterialRevista(int codMaterial) {
 
     ManejadorMaterial* mm = ManejadorMaterial::getInstancia();
 
-    Material* m = mm->find(codMaterial);
+    Material* m = mm->buscarMaterial(codMaterial);
+
+    if (m == NULL) {
+        throw runtime_error("Material no encontrado");
+    }
 
     this->materialActual = m;
 
     Revista* revista = dynamic_cast<Revista*>(m);
 
+    if (revista == NULL) {
+        throw runtime_error("El material encontrado no es una Revista");
+    }
+
     return revista->getDatosMaterial();
 }
 
-
-
-void ControladorMaterial::detallesPrestamo(Date fechaPrestamo, int cantDias) {
+void ControladorPrestamo::detallesPrestamo(Date fechaPrestamo, int cantDias) {
 
     this->fechaPrestamo = fechaPrestamo;
     this->cantDias = cantDias;
@@ -75,20 +114,22 @@ void ControladorMaterial::detallesPrestamo(Date fechaPrestamo, int cantDias) {
 }
 
 
+void ControladorPrestamo::confirmarPrestamo(bool confirmacion) {
 
-void ControladorMaterial::confirmarPrestamo(bool confirmacion) {
-
-        // Crear el préstamo con los datos recordados
-        Prestamo* p = new Prestamo(
-            this->fechaPrestamo,
-            this->cantDias
-        );
-
-        p->setMaterial(this->materialActual); // Asociar el material seleccionado al préstamo
-
-        this->lectorActual->addPrestamo(p); // Agregar el préstamo al lector seleccionado
-
+    if (!confirmacion) {
+        return;
     }
 
+    if (this->lectorActual == NULL || this->materialActual == NULL) {
+        throw runtime_error("Faltan datos para confirmar el préstamo");
+    }
 
+    Prestamo* p = new Prestamo(
+        this->fechaPrestamo,
+        this->cantDias,
+        this->materialActual
+    );
 
+    this->lectorActual->agregarPrestamo(p); // Agregar el préstamo al lector seleccionado
+
+}

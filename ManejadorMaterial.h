@@ -15,19 +15,15 @@ private:
     static ManejadorMaterial* instancia;
     ManejadorMaterial();
     ~ManejadorMaterial();
-    map<string, Material*> colMateriales;
+    map<int, Material*> colMateriales;
 public:
-    ManejadorMaterial* getInstancia();
+    static ManejadorMaterial* getInstancia();
     void agregarMaterial(Material*);
-    Material* buscarMaterial(string);
+    Material* buscarMaterial(int);
     void removerMaterial(Material*);
 };
 
-
-
-
-#endif // MANEJADORMATERIAL_H
-
+#endif
 
 /*
 private:

@@ -21,6 +21,8 @@ public:
 
     int getNumeroEdicion();
     bool getEsMensual();
+    DtRevista getDatosMaterial();   // <-- agregar esto
+
 };
 
 #endif

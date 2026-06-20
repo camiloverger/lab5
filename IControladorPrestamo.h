@@ -1,5 +1,5 @@
-#ifndef CONTROLADORPRESTAMO_H
-#define CONTROLADORPRESTAMO_H
+#ifndef ICONTROLADORPRESTAMO_H
+#define ICONTROLADORPRESTAMO_H
 
 #include <string>
 
@@ -10,7 +10,6 @@ class DtLibro;
 class DtRevista;
 class Date;
 
-// Interfaz del controlador de materiales, SOLO contien las firmas que apararecenen los Diagramas de com
 class IControladorPrestamo {
 public:
 

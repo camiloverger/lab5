@@ -3,6 +3,7 @@
 #include "ManejadorMaterial.h"
 #include "ManejadorUsuario.h"
 
+#include "Usuario.h"
 #include "Material.h"
 #include "Libro.h"
 #include "Revista.h"
@@ -16,123 +17,111 @@
 #include "DtRevista.h"
 
 #include <map>
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
+
+ControladorInformacion* ControladorInformacion::instancia = NULL;
 
 ControladorInformacion::ControladorInformacion() {
+    this->materialActual = NULL;
 }
 
 ControladorInformacion::~ControladorInformacion() {
+}
+
+ControladorInformacion* ControladorInformacion::getInstancia(){
+    if (instancia == NULL) {
+        instancia = new ControladorInformacion();
+    }
+    return instancia;
 }
 
 DtMaterial ControladorInformacion::consultarMaterial(int codMaterial) {
 
     ManejadorMaterial* mm = ManejadorMaterial::getInstancia();
 
-    Material* m = mm->find(codMaterial);
+    Material* m = mm->buscarMaterial(codMaterial);
+
+    if (m == NULL) {
+        throw runtime_error("Material no encontrado");
+    }
 
     this->materialActual = m;
 
-    return m->getDatosMaterial();
+    return DtMaterial(m->getCodigo(), m->getTitulo(), m->getAnioPublicacion());
 }                   
 
 DtLibro ControladorInformacion::seleccionarMaterialLibro(int codMaterial) {
 
     ManejadorMaterial* mm = ManejadorMaterial::getInstancia();
 
-    Material* m = mm->find(codMaterial);
+    Material* m = mm->buscarMaterial(codMaterial);
+
+    if (m == NULL) {
+        throw runtime_error("Material no encontrado");
+    }
 
     this->materialActual = m;
 
     Libro* libro = dynamic_cast<Libro*>(m);
 
-    DtLibro datosLibro = libro->getDatosMaterial();
-
-    float suma = 0;
-    int cantidad = 0;
-
-    map<int, Puntaje*>::iterator it;
-
-    for (it = libro->getPuntajes().begin();
-         it != libro->getPuntajes().end();
-         ++it)
-    {
-        Puntaje* p = it->second;
-
-        suma += p->getValor();
-
-        cantidad++;
+    if (libro == NULL) {
+        throw runtime_error("El material encontrado no es un Libro");
     }
 
-    float promedio = 0;
-
-    if (cantidad > 0)
-        promedio = suma / cantidad; 
-
-    return datosLibro;
+    return libro->getDatosMaterial();
 }
 
 DtRevista ControladorInformacion::seleccionarMaterialRevista(int codMaterial) {
 
     ManejadorMaterial* mm = ManejadorMaterial::getInstancia();
 
-    Material* m = mm->find(codMaterial);
+    Material* m = mm->buscarMaterial(codMaterial);
+
+    if (m == NULL) {
+        throw runtime_error("Material no encontrado");
+    }
 
     this->materialActual = m;
 
     Revista* revista = dynamic_cast<Revista*>(m);
 
-    DtRevista datosRevista = revista->getDatosMaterial();
-
-    float suma = 0;
-    int cantidad = 0;
-
-    map<int, Puntaje*>::iterator it;
-
-    for (it = revista->getPuntajes().begin();
-         it != revista->getPuntajes().end();
-         ++it)
-    {
-        Puntaje* p = it->second;
-
-        suma += p->getValor();
-
-        cantidad++;
+    if (revista == NULL) {
+        throw runtime_error("El material encontrado no es una Revista");
     }
 
-    float promedio = 0;
-
-    if (cantidad > 0)
-        promedio = suma / cantidad;
-
-    return datosRevista;
+    return revista->getDatosMaterial();
 }
 
 void ControladorInformacion::consultarPrestamo(string identLector) {
 
     ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
 
-    // Buscar el lector por identificador
-    Lector* l = mu->find(identLector);
+    Usuario* u = mu->buscarUsuario(identLector);
 
-    // Obtener nombre del lector
+    if (u == NULL) {
+        throw runtime_error("Lector no encontrado: " + identLector);
+    }
+
+    Lector* l = dynamic_cast<Lector*>(u);
+
+    if (l == NULL) {
+        throw runtime_error("El usuario encontrado no es un Lector: " + identLector);
+    }
+
     string nombre = l->getNombre();
 
-    // Recorrer préstamos del lector
-    map<int, Prestamo*>::iterator it;
-
-    for (it = l->getPrestamos().begin();
-         it != l->getPrestamos().end();
-         ++it)
-    {
-        Prestamo* p = it->second;
+    // Recorrer préstamos del lector e imprimirlos
+    // (set, no map: Lector guarda los préstamos en un set<Prestamo*>)
+    for (Prestamo* p : l->getPrestamos()) {
 
         Material* m = p->getMaterial();
 
-        DtMaterial dtM = m->getDatosMaterial();
-
         int codigo = m->getCodigo();
-
         string titulo = m->getTitulo();
 
-
+        cout << "Código: " << codigo << " - Título: " << titulo << "\n";
     }
 }

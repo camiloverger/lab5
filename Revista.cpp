@@ -1,5 +1,7 @@
 #include "Revista.h"
 
+using namespace std;
+
 Revista::Revista(
     int codigo,
     string titulo,
@@ -15,6 +17,7 @@ Revista::Revista(
 
 Revista::~Revista() {
 }
+
 int Revista::getNumeroEdicion()
 {
     return numeroEdicion;
@@ -23,4 +26,8 @@ int Revista::getNumeroEdicion()
 bool Revista::getEsMensual()
 {
     return esMensual;
+}
+
+DtRevista Revista::getDatosMaterial(){
+    return DtRevista(getCodigo(), getTitulo(), getAnioPublicacion(), numeroEdicion, esMensual);
 }

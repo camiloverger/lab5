@@ -12,10 +12,8 @@ DtRevista::DtRevista(
     this->esMensual = esMensual;
 }
 
-// Destructor
 DtRevista::~DtRevista() {}
 
-// Consultas
 int DtRevista::getNumeroEdicion() {
     return numeroEdicion;
 }

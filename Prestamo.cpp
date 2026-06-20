@@ -1,10 +1,10 @@
 #include "Prestamo.h"
 #include "Date.h"
-#include "Material.h
+#include "Material.h"
 
 using namespace std;
 
-Prestamo::Prestamo() : fechaPrestamo(nullptr), diasPermitidos(0), material(nullptr){}
+Prestamo::Prestamo() : fechaPrestamo(), diasPermitidos(0), material(NULL){}
 
 Prestamo::Prestamo (Date fechaPrestamo, int diasPermitidos, Material* material){
     this->fechaPrestamo = fechaPrestamo;

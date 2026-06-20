@@ -9,9 +9,9 @@ public:
     Puntaje();
     Puntaje(int valor);
     Puntaje(Puntaje &);
-    int getValotr();
+    int getValor(); // "valor" mal escrito 
     void setValor(int valor);
-    ~Valor();
+    ~Puntaje();   // <-- corregido 
 
 };
 
