@@ -19,8 +19,16 @@ using namespace std;
 
 Lector::Lector() : Usuario(), fechaRegistro(){}
 
-DtLector Lector::getDatosLector(){ // implementacion
-    return DtLector(getIdentificador(), getNombre(), getPassword(), fechaRegistro);
+DtLector Lector::getDatosLector(){
+
+    string identificador = this->getIdentificador();
+    string nombre = this->getNombre();
+    string password = this->getPassword();
+    Date fecha = this->fechaRegistro;
+
+    DtLector datos(identificador, nombre, password, fecha); 
+
+    return datos;
 }
 
 set<Prestamo*> Lector::getPrestamos(){
