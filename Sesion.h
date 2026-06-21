@@ -1,20 +1,20 @@
 #ifndef SESION_H
 #define SESION_H
 
+#include <string>
+
+using namespace std;
+
 class Sesion{
 
 private:
-    static Sesion* instancia;
-    Usuario* usuario;
-
+    string idUsuario;
 public:
     Sesion();
-    Sesion(String idUsuario);
-    String getUsuario();
-    void setUsuario(Usuario);
-    static Sesion* getInstancia();
+    Sesion(string idUsuario);
+    string getUsuario();
+    void setUsuario(string);
     ~Sesion();
-
 };
 
 #endif

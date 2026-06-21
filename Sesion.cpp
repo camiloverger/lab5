@@ -1,26 +1,20 @@
 #include "Sesion.h"
 #include "Usuario.h"
+#include <string>
+#include <iostream>
 
 using namespace std;
 
-Sesion* Sesion::instancia = NULL;
-Sesion::Sesion(){}
+Sesion::Sesion() : idUsuario(" ") {}
 
-Sesion::Sesion(String idUsuario){
+Sesion::Sesion(string idUsuario) : idUsuario(idUsuario) {}
+
+string Sesion::getUsuario(){
+    return this->idUsuario;
+}
+
+void Sesion::setUsuario(string idUsuario){
     this->idUsuario = idUsuario;
-}
-
-String Sesion::getUsuario(){
-    return this->usuario;
-}
-
-void Sesion::setUsuario(Usuario usuario){
-    this->usuario = usuario;
-}
-
-Sesion* Sesion::getInstancia(){
-    if(instancia == NULL) instancia = new Sesion();
-    return instancia;
 }
 
 Sesion::~Sesion(){}

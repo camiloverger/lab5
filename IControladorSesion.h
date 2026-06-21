@@ -8,8 +8,9 @@ using namespace std;
 class IControladorSesion{
 
 public:
-    virtual bool ingresarCredenciales(string idUsuario, string passUsuario) = 0;
-    virtual void cerrarSesion() = 0;
+    virtual bool ingresarCredenciales(string, string) = 0;
+    virtual void cancelarInicioSesion() = 0;
+    virtual void cerrarSesion(string) = 0;
 
 };
 
