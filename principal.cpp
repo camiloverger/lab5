@@ -27,10 +27,8 @@ int main(){
         switch(opcion) {
 
             case 1: // iniciar sesión
-                iniciarSesion();
                 break;
             case 2: // cerrar sesión
-                cerrarSesion();
                 break;
             case 3: // registrar lector
                 break;
@@ -67,23 +65,5 @@ int main(){
 
 }
 
-// FUNCIONES INTERNAS
 
-void iniciarSesion(){
-
-    string usr;
-    string pass;
-    cout << "Usuario: ";
-    cin >> usr;
-    cout << "Contraseña: ";
-    cin >> pass;
-    bool sesion = ingresarCredenciales(usr, pass);
-    if(!sesion){
-        int opcion;
-        cout << "Usuario o contraseña incorrectos.\n(0) Volver a intentar - (1) Cancelar\nOpción: ";
-        cin >> opcion;
-        if(opcion == 0) iniciarSesion();
-    }
-
-}
 
