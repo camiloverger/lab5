@@ -1,4 +1,3 @@
-#include "IControladorSesion.h"
 #include "ControladorSesion.h"
 #include "Sesion.h"
 #include "Usuario.h"
@@ -7,52 +6,60 @@
 
 using namespace std;
 
-// FIRMAS FUNCIONES INTERNAS
-
-bool validar(string idUsuario, string passUsuario);
-
-// FUNCIONES PRINCIPALES
-
 ControladorSesion* ControladorSesion::instancia = NULL;
 ControladorSesion::ControladorSesion(){}
 ControladorSesion::~ControladorSesion(){}
 
 ControladorSesion* ControladorSesion::getInstancia(){
-    if(instancia == NULL) instancia = new ControladorSesion();
+    if(instancia == NULL) 
+        instancia = new ControladorSesion();
     return instancia;
 }
 
-bool ControladorSesion::ingresarCredenciales(string idUsuario, string passUsuario){
+Sesion* ControladorSesion::buscarSesion(string idUsuario){
+    for (set<Sesion*>::iterator it = sesiones.begin(); it != sesiones.end(); ++it){
+        if ((*it)->getUsuario() == idUsuario){
+            return *it;
+        }
+    }
+    return NULL;
+}
 
-    Sesion se = new Sesion();
-    Sesion sesion = se.getInstancia();
-    if(!validar(idUsuario, passUsuario)){
-        sesion.setIdUsuario(nullptr);
+bool ControladorSesion::ingresarCredenciales(string idUsuario, string passUsuario){
+    ManejadorUsuario* mm = ManejadorUsuario::getInstancia();
+    Usuario* u = mm->buscarUsuario(idUsuario);
+
+    if (u == NULL){
         return false;
     }
-    else{
-        sesion.setIdUsuario(idUsuario);
-        return true;
+
+    if (!u->validarContrasenia(passUsuario))
+    {
+        return false;
     }
 
+    //si la sesione esta activa, no tiene sentido ingresar las credenciales
+    if(buscarSesion(idUsuario) != NULL){
+        return false;
+    }
+
+    Sesion* s = new Sesion(idUsuario);
+    sesiones.insert(s);
+    
+    return true;
 }
 
-void ControladorSesion::cerrarSesion(){
+void ControladorSesion::cancelarInicioSesion(){ }
 
-    Sesion se = new Sesion();
-    Sesion sesion = se.getInstancia();
-    sesion.setUsuario(nullptr);
-
+void ControladorSesion::cerrarSesion(string idUsuario){
+    for (set<Sesion*>::iterator it = sesiones.begin(); it != sesiones.end(); ++it){
+        if ((*it)->getUsuario() == idUsuario)
+        {
+            delete *it;
+            sesiones.erase(it);
+            break;
+        }
+        
+    }
 }
 
-// FUNCIONES INTERNAS
-
-bool validar(string idUsuario, string passUsuario){
-
-    ManejadorUsuario manejador = new ManejadorUsuario();
-    Usuario usuario = manejador.buscarUsuario(idUsuario);
-    if(usuario == NULL) return false;
-    if(strcmp(usuario.password, passUsuario)) return true;
-    else return false;
-
-}
